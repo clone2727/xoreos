@@ -25,6 +25,7 @@
 #include <memory>
 
 #include "src/common/util.h"
+#include "src/common/string.h"
 #include "src/common/strutil.h"
 #include "src/common/maths.h"
 #include "src/common/error.h"
@@ -119,7 +120,7 @@ bool Creature::isPC() const {
 
 void Creature::createFakePC() {
 	_name.setString(LangMan.getCurrentLanguageText(), LangMan.getCurrentGender(), "Fakoo McFakeston");
-	_tag = Common::UString::format("[PC: %s]", _name.getString().c_str());
+	_tag = Common::String::format("[PC: %s]", _name.getString().c_str());
 
 	_isPC = true;
 

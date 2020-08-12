@@ -77,7 +77,7 @@ uint32 Version::getVersionBuild() const {
 }
 
 Common::UString Version::getVersionString() const {
-	return Common::UString::format("%u.%02u.%u", _versionMajor, _versionMinor, _versionBuild);
+	return Common::String::format("%u.%02u.%u", _versionMajor, _versionMinor, _versionBuild);
 }
 
 uint16 Version::getOptimumVersionMajor() const {
@@ -111,7 +111,7 @@ uint16 Version::getOptimumVersionMinor() const {
 }
 
 Common::UString Version::getOptimumVersionString() {
-	return Common::UString::format("%u.%02u",
+	return Common::String::format("%u.%02u",
 			getOptimumVersionMajor(), getOptimumVersionMinor());
 }
 

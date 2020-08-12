@@ -23,6 +23,7 @@
  */
 
 #include "src/common/error.h"
+#include "src/common/string.h"
 #include "src/common/strutil.h"
 
 #include "src/engines/kotor2/creature.h"
@@ -144,7 +145,7 @@ void Creature::getPartModelsPC(PartModels &parts, uint32 state, uint8 textureVar
 
 	parts.portrait = "po_" + parts.head;
 	parts.portrait.replaceAll("0", "");
-	parts.bodyTexture += Common::UString::format("%02u", textureVariation);
+	parts.bodyTexture += Common::String::format("%02u", textureVariation);
 
 	loadMovementRate("PLAYER");
 }

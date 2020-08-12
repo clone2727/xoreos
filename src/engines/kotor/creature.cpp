@@ -22,6 +22,7 @@
  *  Creature within an area in Star Wars: Knights of the Old Republic.
  */
 
+#include "src/common/string.h"
 #include "src/common/strutil.h"
 
 #include "src/graphics/aurora/model.h"
@@ -198,7 +199,7 @@ void Creature::getPartModelsPC(PartModels &parts, uint32 state, uint8 textureVar
 
 	parts.portrait = "po_" + parts.head;
 	parts.portrait.replaceAll("0", "");
-	parts.bodyTexture += Common::UString::format("%02u", textureVariation);
+	parts.bodyTexture += Common::String::format("%02u", textureVariation);
 
 	loadMovementRate("PLAYER");
 }

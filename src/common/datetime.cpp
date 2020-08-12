@@ -24,6 +24,7 @@
 
 #include "src/common/datetime.h"
 #include "src/common/error.h"
+#include "src/common/string.h"
 
 using boost::posix_time::ptime;
 using boost::posix_time::second_clock;
@@ -61,7 +62,7 @@ DateTime::DateTime(const UString &value) : ptime(not_a_date_time) {
 UString DateTime::formatDateISO(uint32 sep) const {
 	const UString sepStr(sep, sep ? 1 : 0);
 
-	return UString::format("%04d%s%02d%s%02d",
+	return String::format("%04d%s%02d%s%02d",
 	                       (int) date().year() , sepStr.c_str(),
 	                       (int) date().month(), sepStr.c_str(),
 	                       (int) date().day());
@@ -70,7 +71,7 @@ UString DateTime::formatDateISO(uint32 sep) const {
 UString DateTime::formatTimeISO(uint32 sep) const {
 	const UString sepStr(sep, sep ? 1 : 0);
 
-	return UString::format("%02d%s%02d%s%02d",
+	return String::format("%02d%s%02d%s%02d",
 	                       (int) time_of_day().hours()  , sepStr.c_str(),
 	                       (int) time_of_day().minutes(), sepStr.c_str(),
 	                       (int) time_of_day().seconds());
@@ -79,7 +80,7 @@ UString DateTime::formatTimeISO(uint32 sep) const {
 UString DateTime::formatDateTimeISO(uint32 sep, uint32 sepDate, uint32 sepTime) const {
 	const UString sepStr(sep, sep ? 1 : 0);
 
-	return UString::format("%s%s%s", formatDateISO(sepDate).c_str(), sepStr.c_str(),
+	return String::format("%s%s%s", formatDateISO(sepDate).c_str(), sepStr.c_str(),
 	                                 formatTimeISO(sepTime).c_str());
 }
 
