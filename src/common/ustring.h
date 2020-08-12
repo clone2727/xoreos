@@ -30,6 +30,7 @@
 #include <vector>
 
 #include "src/common/types.h"
+#include "src/common/string.h"
 #include "src/common/system.h"
 
 #include "external/utf8cpp/utf8.h"
@@ -184,17 +185,6 @@ public:
 
 	static void splitTextTokens(const UString &text, std::vector<UString> &tokens);
 
-	static uint32 toLower(uint32 c);
-	static uint32 toUpper(uint32 c);
-
-	static bool isASCII(uint32 c); ///< Is the character an ASCII character?
-
-	static bool isSpace(uint32 c); ///< Is the character an ASCII space character?
-	static bool isDigit(uint32 c); ///< Is the character an ASCII digit character?
-	static bool isAlpha(uint32 c); ///< Is the character an ASCII alphabetic character?
-	static bool isAlNum(uint32 c); ///< Is the character an ASCII alphanumeric character?
-	static bool isCntrl(uint32 c); ///< Is the character an ASCII control character?
-
 	static uint32 fromUTF16(uint16 c);
 
 private:
@@ -234,7 +224,7 @@ struct hashUStringCaseInsensitive {
 		size_t seed = 5381;
 
 		for (UString::iterator it = str.begin(); it != str.end(); ++it)
-			seed = ((seed << 5) + seed) + UString::toLower(*it);
+			seed = ((seed << 5) + seed) + String::toLower(*it);
 
 		return seed;
 	}

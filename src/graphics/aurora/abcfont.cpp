@@ -232,7 +232,7 @@ void ABCFont::calcCharVertices(Char &c) {
 }
 
 const ABCFont::Char &ABCFont::findChar(uint32 c) const {
-	if (Common::UString::isASCII(c))
+	if (Common::String::isASCII(c))
 		return _ascii[c];
 
 	std::map<uint32, Char>::const_iterator ch = _extended.find(c);
