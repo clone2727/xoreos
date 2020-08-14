@@ -250,6 +250,10 @@ const char *UString::c_str() const {
 	return _string.c_str();
 }
 
+std::string &UString::getString() {
+	return _string;
+}
+
 const std::string &UString::toString() const {
 	return _string;
 }

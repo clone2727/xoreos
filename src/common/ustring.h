@@ -122,6 +122,9 @@ public:
 	const char *c_str() const;
 
 	/** Return the (utf8 encoded) string data. */
+	std::string &getString();
+
+	/** Return the (utf8 encoded) string data. */
 	const std::string &toString() const;
 
 	iterator begin() const;
