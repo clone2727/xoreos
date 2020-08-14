@@ -151,8 +151,10 @@ void LocString::readString(uint32 languageID, Common::SeekableReadStream &stream
 	std::unique_ptr<Common::MemoryReadStream> parsed(LangMan.preParseColorCodes(*data));
 
 	Common::Encoding encoding = LangMan.getEncodingLocString(LangMan.getLanguageGendered(languageID));
-	if (encoding != Common::kEncodingInvalid)
+	if (encoding != Common::kEncodingInvalid) {
 		s.first->second = Common::readString(*parsed, encoding);
+		Common::String::enforceValidUTF8(s.first->second.toString());
+	}
 }
 
 void LocString::readLocSubString(Common::SeekableReadStream &stream) {

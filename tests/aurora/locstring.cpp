@@ -36,6 +36,8 @@
 #include "src/aurora/language.h"
 #include "src/aurora/talkman.h"
 
+#include "external/utf8cpp/utf8.h"
+
 static const char *kUTF8String  = "F""\xc3""\xb6""\xc3""\xb6""b""\xc3""\xa4""r";
 static const char *kUTF8String0 = "F""\xc3""\xb6""\xc3""\xb6""b""\xc3""\xa4""r0";
 static const char *kUTF8String1 = "F""\xc3""\xb6""\xc3""\xb6""b""\xc3""\xa4""r1";
@@ -245,7 +247,7 @@ GTEST_TEST_F(LocString, wrongEncodingUTF8) {
 	Common::MemoryReadStream stream(kData);
 
 	Aurora::LocString locString;
-	EXPECT_THROW(locString.readString(1, stream), Common::Exception);
+	EXPECT_THROW(locString.readString(1, stream), utf8::exception);
 }
 
 GTEST_TEST_F(LocString, wrongEncodingNonUTF8) {

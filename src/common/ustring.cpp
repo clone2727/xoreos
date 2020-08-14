@@ -35,7 +35,7 @@
 
 namespace Common {
 
-UString::UString() : _size(0) {
+UString::UString() {
 }
 
 UString::UString(const UString &str) {
@@ -54,12 +54,12 @@ UString::UString(const char *str, size_t n) {
 	*this = std::string(str, n);
 }
 
-UString::UString(uint32 c, size_t n) : _size(0) {
+UString::UString(uint32 c, size_t n) {
 	while (n-- > 0)
 		*this += c;
 }
 
-UString::UString(iterator sBegin, iterator sEnd) : _size(0) {
+UString::UString(iterator sBegin, iterator sEnd) {
 	for (; (sBegin != sEnd) && *sBegin; ++sBegin)
 		*this += *sBegin;
 }
@@ -69,15 +69,12 @@ UString::~UString() {
 
 UString &UString::operator=(const UString &str) {
 	_string = str._string;
-	_size   = str._size;
 
 	return *this;
 }
 
 UString &UString::operator=(const std::string &str) {
 	_string = str;
-
-	recalculateSize();
 
 	return *this;
 }
@@ -138,8 +135,6 @@ UString UString::operator+(uint32 c) const {
 
 UString &UString::operator+=(const UString &str) {
 	_string += str._string;
-	_size   += str._size;
-
 	return *this;
 }
 
@@ -162,8 +157,6 @@ UString &UString::operator+=(uint32 c) {
 		Exception e(se);
 		throw e;
 	}
-
-	_size++;
 
 	return *this;
 }
@@ -238,17 +231,15 @@ bool UString::lessIgnoreCase(const UString &str) const {
 
 void UString::swap(UString &str) {
 	_string.swap(str._string);
-
-	std::swap(_size, str._size);
 }
 
 void UString::clear() {
 	_string.clear();
-	_size = 0;
 }
 
 size_t UString::size() const {
-	return _size;
+	// Calculate the "distance" in characters from the beginning and end
+	return utf8::distance(_string.begin(), _string.end());
 }
 
 bool UString::empty() const {
@@ -363,7 +354,7 @@ void UString::truncate(const iterator &it) {
 }
 
 void UString::truncate(size_t n) {
-	if (n >= _size)
+	if (n >= size())
 		return;
 
 	UString temp;
@@ -402,7 +393,6 @@ void UString::trim() {
 			break;
 
 	_string = std::string(itStart.base(), itEnd.base());
-	recalculateSize();
 }
 
 void UString::trimLeft() {
@@ -417,7 +407,6 @@ void UString::trimLeft() {
 			break;
 
 	_string = std::string(itStart.base(), end().base());
-	recalculateSize();
 }
 
 void UString::trimRight() {
@@ -442,7 +431,6 @@ void UString::trimRight() {
 	}
 
 	_string = std::string(begin().base(), itEnd.base());
-	recalculateSize();
 }
 
 void UString::replaceAll(uint32 what, uint32 with) {
@@ -753,16 +741,6 @@ size_t UString::split(const UString &text, uint32 delim, std::vector<UString> &t
 	}
 
 	return length;
-}
-
-void UString::recalculateSize() {
-	try {
-		// Calculate the "distance" in characters from the beginning and end
-		_size = utf8::distance(_string.begin(), _string.end());
-	} catch (const std::exception &se) {
-		Exception e(se);
-		throw e;
-	}
 }
 
 } // End of namespace Common

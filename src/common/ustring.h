@@ -187,10 +187,6 @@ public:
 
 private:
 	std::string _string; ///< Internal string holding the actual data.
-
-	size_t _size;
-
-	void recalculateSize();
 };
 
 
