@@ -108,6 +108,12 @@ inline T toUpper(T c) {
 /** Get a UTF-32 codepoint from a UTF-16 character. */
 uint32_t fromUTF16(uint16_t c);
 
+/** Is the string valid UTF-8? */
+bool isValidUTF8(const std::string &str);
+
+/** Throw a utf8::exception if the string is not valid UTF-8. */
+void enforceValidUTF8(const std::string &str);
+
 } // End of namespace String
 } // End of namespace Common
 

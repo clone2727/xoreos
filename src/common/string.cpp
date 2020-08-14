@@ -74,5 +74,19 @@ uint32_t fromUTF16(uint16_t c) {
 	return *utf8::iterator<std::string::const_iterator>(utf8result.begin(), utf8result.begin(), utf8result.end());
 }
 
+bool isValidUTF8(const std::string &str) {
+	try {
+		enforceValidUTF8(str);
+	} catch (utf8::exception &ex) {
+		return false;
+	}
+
+	return true;
+}
+
+void enforceValidUTF8(const std::string &str) {
+	utf8::distance(str.begin(), str.end());
+}
+
 } // End of namespace String
 } // End of namespace Common

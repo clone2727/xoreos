@@ -57,3 +57,8 @@ GTEST_TEST(String, charClasses) {
 GTEST_TEST(String, fromUTF16) {
 	EXPECT_EQ(Common::String::fromUTF16(0x00F6), 0xF6);
 }
+
+GTEST_TEST(String, validUTF8) {
+	EXPECT_TRUE(Common::String::isValidUTF8("Some ASCII, now\xC3\xB6"));
+	EXPECT_FALSE(Common::String::isValidUTF8("This is bad: \xC3\xC3\xC3\xC3"));
+}
