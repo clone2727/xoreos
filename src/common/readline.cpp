@@ -24,6 +24,8 @@
 
 #include <algorithm>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/util.h"
 #include "src/common/readline.h"
 
@@ -464,7 +466,7 @@ void ReadLine::tabComplete() {
 	UString command, arguments;
 	_currentLine.split(separator, command, arguments);
 
-	arguments.trimLeft();
+	boost::trim_left(arguments.getString());
 
 	ArgumentSets::iterator args = _arguments.find(command);
 	if (args == _arguments.end())

@@ -25,6 +25,8 @@
 #include <cassert>
 #include <cstring>
 
+#include <boost/algorithm/string.hpp>
+
 #include "external/glm/gtc/type_ptr.hpp"
 #include "external/glm/gtc/matrix_transform.hpp"
 #include "external/glm/gtx/matrix_decompose.hpp"
@@ -488,7 +490,7 @@ void ModelNode::loadTextures(const std::vector<Common::UString> &textures) {
 
 	}
 
-	envMap.trim();
+	boost::trim(envMap.getString());
 	if (!envMap.empty()) {
 		try {
 			_mesh->data->envMap = TextureMan.get(envMap);

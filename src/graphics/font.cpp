@@ -22,6 +22,8 @@
  *  A font.
  */
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/util.h"
 #include "src/common/maths.h"
 
@@ -229,7 +231,7 @@ float Font::split(const Common::UString &line, std::vector<Common::UString> &lin
 	// Trim the lines
 	if (trim)
 		for (std::vector<Common::UString>::iterator l = lines.begin(); l != lines.end(); ++l)
-			l->trim();
+			boost::trim(l->getString());
 
 	return length;
 }

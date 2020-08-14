@@ -28,6 +28,8 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/error.h"
 #include "src/common/encoding.h"
 #include "src/common/readstream.h"
@@ -472,9 +474,9 @@ void ConfigFile::parseConfigLine(const UString &line, UString &domainName,
 		throw Exception("Missing ']' (line %d)", lineNumber);
 
 	// Remove excess whitespace
-	key.trim();
-	value.trim();
-	comment.trim();
+	boost::trim(key.getString());
+	boost::trim(value.getString());
+	boost::trim(comment.getString());
 
 	// Read the comment character #
 	if (hasComment)

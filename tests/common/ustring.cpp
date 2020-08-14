@@ -328,20 +328,6 @@ GTEST_TEST(UString, truncateIterator) {
 	EXPECT_STREQ(str.c_str(), "");
 }
 
-GTEST_TEST(UString, trim) {
-	Common::UString str1("  Foobar  ");
-	Common::UString str2("  Foobar  ");
-	Common::UString str3("  Foobar  ");
-
-	str1.trimLeft();
-	str2.trimRight();
-	str3.trim();
-
-	EXPECT_STREQ(str1.c_str(), "Foobar  ");
-	EXPECT_STREQ(str2.c_str(), "  Foobar");
-	EXPECT_STREQ(str3.c_str(), "Foobar");
-}
-
 GTEST_TEST(UString, replaceAllChars) {
 	Common::UString str("Foobar Barfoo");
 

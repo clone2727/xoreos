@@ -26,6 +26,8 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/util.h"
 #include "src/common/maths.h"
 #include "src/common/configman.h"
@@ -536,7 +538,7 @@ void Creature::loadProperties(const Aurora::GFF3Struct &gff) {
 	_lastName  = gff.getString("LastName" , _lastName);
 
 	_name = _firstName + " " + _lastName;
-	_name.trim();
+	boost::trim(_name.getString());
 
 	// Description
 

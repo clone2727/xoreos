@@ -28,6 +28,8 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/foxpro.h"
 #include "src/common/error.h"
 #include "src/common/encoding.h"
@@ -348,7 +350,7 @@ UString FoxPro::getString(const Record &record, size_t field) const {
 	UString str = readStringFixed(stream, kEncodingLatin9, f.size);
 
 	// xBase fields are padded with spaces...
-	str.trimRight();
+	boost::trim_right(str.getString());
 
 	return str;
 }

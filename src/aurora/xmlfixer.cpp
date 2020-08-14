@@ -24,6 +24,8 @@
 
 #include <algorithm>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/encoding.h"
 #include "src/common/memreadstream.h"
 #include "src/common/memwritestream.h"
@@ -96,7 +98,7 @@ Common::UString XMLFixer::fixXMLElement(const Common::UString &element) {
 	Common::UString line;
 	for (Common::UString segment : segments) {
 		// Correct for " = " in playermenu_popup.xml
-		segment.trim();
+		boost::trim(segment.getString());
 
 		// Find the last white space character
 		Common::UString name, value = segment;
@@ -110,8 +112,8 @@ Common::UString XMLFixer::fixXMLElement(const Common::UString &element) {
 		}
 
 		// Trim both parts
-		name.trim();
-		value.trim();
+		boost::trim(name.getString());
+		boost::trim(value.getString());
 
 		if (line.empty()) {
 			// First segment should have the element type
@@ -367,7 +369,7 @@ XMLFixer::ElementList XMLFixer::readXMLStream(Common::SeekableReadStream &in) {
 
 		// Read a line of text
 		Common::UString line = Common::readStringLine(in, encoding);
-		line.trim(); // Trim now for maximum performance benefit
+		boost::trim(line.getString()); // Trim now for maximum performance benefit
 
 		// Check for comment tags
 		const Common::UString::iterator startComment = line.findFirst(kStartComment);
@@ -379,7 +381,7 @@ XMLFixer::ElementList XMLFixer::readXMLStream(Common::SeekableReadStream &in) {
 			std::advance(endComment, kEndComment.size());
 
 			line.erase(startComment, endComment);
-			line.trimRight();
+			boost::trim_right(line.getString());
 
 		} else if (inComment) {
 			// End of a comment element
@@ -390,7 +392,7 @@ XMLFixer::ElementList XMLFixer::readXMLStream(Common::SeekableReadStream &in) {
 				std::advance(endComment, kEndComment.size());
 
 				line.erase(line.begin(), endComment);
-				line.trimLeft();
+				boost::trim_left(line.getString());
 				inComment = false;
 
 			} else {
@@ -455,7 +457,7 @@ bool XMLFixer::isValidXMLHeader(Common::SeekableReadStream &in) {
 	while (line.empty()) {
 		line = Common::readStringLine(in, encoding);
 
-		line.trim();
+		boost::trim(line.getString());
 	}
 
 	// Check for an XML header

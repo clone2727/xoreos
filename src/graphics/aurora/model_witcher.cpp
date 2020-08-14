@@ -30,6 +30,8 @@
 
 #include <cassert>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/error.h"
 #include "src/common/maths.h"
 #include "src/common/readstream.h"
@@ -849,7 +851,7 @@ void ModelNode_Witcher::readTextures(Model_Witcher::ParserContext &ctx,
 		*line = Common::readStringLine(*ctx.mdb, Common::kEncodingASCII);
 		ctx.mdb->skip(1);
 
-		line->trim();
+		boost::trim(line->getString());
 	}
 
 	textures.resize(4);

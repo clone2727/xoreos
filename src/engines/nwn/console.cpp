@@ -25,6 +25,8 @@
 #include <algorithm>
 #include <functional>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/ustring.h"
 #include "src/common/util.h"
 #include "src/common/configman.h"
@@ -111,7 +113,7 @@ void Console::updateCampaigns() {
 	for (int i = 0; i < 5; i++) {
 		Common::UString name = TalkMan.getString(kCampaignNames[i]);
 		name.truncate(name.findFirst('\n'));
-		name.trim();
+		boost::trim(name.getString());
 
 		_campaigns.push_back(name);
 		_campaignModules.insert(std::make_pair(name, i));
@@ -122,7 +124,7 @@ void Console::updateCampaigns() {
 		for (int i = 5; i < 8; i++) {
 			Common::UString name = "XP1: " + TalkMan.getString(kCampaignNames[i]);
 			name.truncate(name.findFirst('\n'));
-			name.trim();
+			boost::trim(name.getString());
 
 			_campaigns.push_back(name);
 			_campaignModules.insert(std::make_pair(name, i));
@@ -134,7 +136,7 @@ void Console::updateCampaigns() {
 		for (int i = 8; i < 11; i++) {
 			Common::UString name = "XP2: " + TalkMan.getString(kCampaignNames[i]);
 			name.truncate(name.findFirst('\n'));
-			name.trim();
+			boost::trim(name.getString());
 
 			_campaigns.push_back(name);
 			_campaignModules.insert(std::make_pair(name, i));

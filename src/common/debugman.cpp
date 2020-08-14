@@ -24,6 +24,8 @@
  *  The debug manager, managing debug channels.
  */
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/version/version.h"
 
 #include "src/common/maths.h"
@@ -161,8 +163,8 @@ void DebugManager::setVerbosityLevelsFromConfig() {
 		if ((config.size() != 2) || config[0].empty())
 			continue;
 
-		config[0].trim();
-		config[1].trim();
+		boost::trim(config[0].getString());
+		boost::trim(config[1].getString());
 
 		uint32 level = 0;
 		try {

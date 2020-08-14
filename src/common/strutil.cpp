@@ -33,6 +33,8 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
+
 #include "src/common/system.h"
 #include "src/common/string.h"
 #include "src/common/strutil.h"
@@ -113,7 +115,7 @@ static bool tagToString(uint32 tag, bool trim, UString &str) {
 
 	str = String::format("%c%c%c%c", tS[0], tS[1], tS[2], tS[3]);
 	if (trim)
-		str.trim();
+		boost::trim(str.getString());
 
 	return true;
 }

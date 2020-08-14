@@ -28,6 +28,8 @@
 
 #include <functional>
 
+#include <boost/algorithm/string.hpp>
+
 #include "external/glm/gtc/matrix_transform.hpp"
 
 #include "src/common/util.h"
@@ -1063,8 +1065,8 @@ void Console::execute(const Common::UString &line) {
 	Common::UString redirect;
 	line.split(line.findFirst('>'), command, redirect, true);
 
-	command.trim();
-	redirect.trim();
+	boost::trim(command.getString());
+	boost::trim(redirect.getString());
 
 
 	// Split command from arguments
@@ -1073,8 +1075,8 @@ void Console::execute(const Common::UString &line) {
 
 	command.split(command.findFirst(' '), cl.cmd, cl.args, true);
 
-	cl.cmd.trim();
-	cl.args.trim();
+	boost::trim(cl.cmd.getString());
+	boost::trim(cl.args.getString());
 
 
 	// Find the command

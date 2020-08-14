@@ -143,10 +143,6 @@ public:
 	void truncate(const iterator &it);
 	void truncate(size_t n);
 
-	void trimLeft();
-	void trimRight();
-	void trim();
-
 	/** Replace all occurrences of a character with another character. */
 	void replaceAll(uint32 what, uint32 with);
 	/** Replace all occurrences of a substring with another substring. */
