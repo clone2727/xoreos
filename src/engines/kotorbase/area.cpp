@@ -765,7 +765,7 @@ Object *Area::getActiveObject() {
 Object *Area::getObjectByTag(const Common::UString &tag) {
 	for (ObjectList::iterator o = _objects.begin();
 			o != _objects.end(); ++o) {
-		if ((*o)->getTag().stricmp(tag) == 0)
+		if (Common::String::compareIgnoreCase((*o)->getTag().c_str(), tag.c_str()) == 0)
 			return *o;
 	}
 	return 0;

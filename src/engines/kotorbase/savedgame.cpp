@@ -74,7 +74,7 @@ void SavedGame::fillFromSAV(const Aurora::ERFFile &erf, const Common::UString &m
 	for (Aurora::Archive::ResourceList::const_iterator it = resources.begin();
 			it != resources.end(); ++it) {
 		const Aurora::Archive::Resource &res = *it;
-		if (res.name.stricmp(moduleName) == 0 && res.type == Aurora::kFileTypeSAV) {
+		if (res.type == Aurora::kFileTypeSAV && Common::String::compareIgnoreCase(res.name.c_str(), moduleName.c_str()) == 0) {
 			moduleSavIndex = res.index;
 			break;
 		}
