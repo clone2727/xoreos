@@ -123,6 +123,12 @@ bool isValidUTF8(const std::string &str);
 /** Throw a utf8::exception if the string is not valid UTF-8. */
 void enforceValidUTF8(const std::string &str);
 
+/** Perform a case-insensitive comparison. */
+int compareIgnoreCase(const std::string &left, const std::string &right);
+
+/** Perform a case-insensitive comparison. */
+int compareIgnoreCase(const char *left, const char *right);
+
 } // End of namespace String
 } // End of namespace Common
 

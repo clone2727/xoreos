@@ -23,6 +23,7 @@
  */
 
 #include <cstdarg>
+#include <cstring>
 
 #include <memory>
 #include <system_error>
@@ -104,6 +105,34 @@ bool isValidUTF8(const std::string &str) {
 
 void enforceValidUTF8(const std::string &str) {
 	utf8::distance(str.begin(), str.end());
+}
+
+int compareIgnoreCase(const std::string &left, const std::string &right) {
+	return compareIgnoreCase(left.c_str(), right.c_str());
+}
+
+int compareIgnoreCase(const char *left, const char *right) {
+#ifdef HAVE_STRCASECMP
+	return strcasecmp(left, right);
+#else
+	const unsigned char *leftPtr = reinterpret_cast<const unsigned char *>(left);
+	const unsigned char *rightPtr = reinterpret_cast<const unsigned char *>(right);
+
+	if (leftPtr == rightPtr)
+		return 0;
+
+	int result;
+	for (;;) {
+		result = toLower(*leftPtr) - toLower(*rightPtr++);
+		if (result != 0)
+			break;
+
+		if (*leftPtr++ == '\0')
+			break;
+	}
+
+	return result;
+#endif
 }
 
 } // End of namespace String

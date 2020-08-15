@@ -68,3 +68,33 @@ GTEST_TEST(String, validUTF8) {
 	EXPECT_TRUE(Common::String::isValidUTF8("Some ASCII, now\xC3\xB6"));
 	EXPECT_FALSE(Common::String::isValidUTF8("This is bad: \xC3\xC3\xC3\xC3"));
 }
+
+GTEST_TEST(String, compareIgnoreCase) {
+	struct TestCase {
+		const char *left;
+		const char *right;
+		int result;
+	};
+
+	static const TestCase testCases[] = {
+		{ "abc", "def", -1 },
+		{ "def", "abc", 1 },
+		{ "ABC", "def", -1 },
+		{ "abc", "DEF", -1 },
+		{ "QED", "qed", 0 },
+		{ "de", "defg", -1 },
+		{ "defg", "de", 1 }
+	};
+
+	for (const TestCase &testCase : testCases) {
+		int result = Common::String::compareIgnoreCase(testCase.left, testCase.right);
+
+		if (testCase.result == 0) {
+			EXPECT_EQ(result, 0);
+		} else if (testCase.result < 0) {
+			EXPECT_TRUE(result < 0);
+		} else {
+			EXPECT_TRUE(result > 0);
+		}
+	}
+}
