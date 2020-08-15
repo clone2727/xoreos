@@ -68,6 +68,24 @@ std::string formatV(const char* format, va_list args) {
 	return result;
 }
 
+std::string convertToUTF8(const std::u16string &str) {
+	std::string result;
+	utf8::utf16to8(str.begin(), str.end(), std::back_inserter(result));
+	return result;
+}
+
+std::string convertToUTF8(const std::u32string &str) {
+	std::string result;
+	utf8::utf32to8(str.begin(), str.end(), std::back_inserter(result));
+	return result;
+}
+
+std::string convertToUTF8(uint32_t c) {
+	std::string result;
+	utf8::utf32to8(&c, &c + 1, std::back_inserter(result));
+	return result;
+}
+
 uint32_t fromUTF16(uint16_t c) {
 	std::string utf8result;
 	utf8::utf16to8(&c, &c + 1, std::back_inserter(utf8result));

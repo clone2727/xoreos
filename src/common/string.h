@@ -105,6 +105,15 @@ inline T toUpper(T c) {
 	return isASCII(c) ? std::toupper(c) : c;
 }
 
+/** Convert a UTF-16 string into UTF-8. */
+std::string convertToUTF8(const std::u16string &str);
+
+/** Convert a UTF-32 string into UTF-8. */
+std::string convertToUTF8(const std::u32string &str);
+
+/** Convert a UTF-32 codepoint into a UTF-8 string. */
+std::string convertToUTF8(uint32_t c);
+
 /** Get a UTF-32 codepoint from a UTF-16 character. */
 uint32_t fromUTF16(uint16_t c);
 

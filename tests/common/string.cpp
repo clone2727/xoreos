@@ -54,6 +54,12 @@ GTEST_TEST(String, charClasses) {
 	EXPECT_FALSE(Common::String::isCntrl('x'));
 }
 
+GTEST_TEST(String, convertToUTF8) {
+	EXPECT_EQ(Common::String::convertToUTF8(u"Some text"), std::string("Some text"));
+	EXPECT_EQ(Common::String::convertToUTF8(UINT32_C(0x1234)), std::string("\xE1\x88\xB4"));
+	EXPECT_EQ(Common::String::convertToUTF8(U"Some more text"), std::string("Some more text"));
+}
+
 GTEST_TEST(String, fromUTF16) {
 	EXPECT_EQ(Common::String::fromUTF16(0x00F6), 0xF6);
 }
