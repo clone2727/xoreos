@@ -155,7 +155,7 @@ private:
 	float _height;
 
 	bool _cursorBlinkState;
-	uint32 _lastCursorBlink;
+	uint32_t _lastCursorBlink;
 
 	float _scrollbarLength;
 	float _scrollbarPosition;
@@ -272,9 +272,9 @@ private:
 	size_t _tabCount;
 	bool _printedCompleteWarning;
 
-	 int8  _lastClickCount;
-	uint8  _lastClickButton;
-	uint32 _lastClickTime;
+	 int8_t  _lastClickCount;
+	uint8_t  _lastClickButton;
+	uint32_t _lastClickTime;
 
 	ptrdiff_t _lastClickX;
 	ptrdiff_t _lastClickY;
